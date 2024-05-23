@@ -1,8 +1,16 @@
 package com.example.blog.domain.post.entity;
 
-import jakarta.persistence.Id;
+import com.example.blog.global.jpa.BaseEntity;
+import jakarta.persistence.Entity;
+import lombok.Getter;
+import lombok.experimental.SuperBuilder;
 
-public class Post {
-    @Id
-    private Long id;
+@Entity
+@Getter
+@SuperBuilder
+public class Post extends BaseEntity {
+
+    private String title;
+    private String content;
+
 }
