@@ -10,8 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/member")
 
 public class MemberController {
+
     @GetMapping("/login")
     public String loginPage() {
         return "member/login";
+    }
+
+    @GetMapping("/signup")
+    public String signupPage() {
+        return "member/signup";
     }
 }
