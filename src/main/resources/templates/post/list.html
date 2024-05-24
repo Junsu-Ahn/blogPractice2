@@ -1,3 +1,18 @@
-<div>
-    [[${postList}]]
-</div>
+<table xmlns:th="http://www.w3.org/1999/xhtml">
+    <thead>
+    <tr>
+        <th>번호</th>
+        <th>제목</th>
+        <th>작성일</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="post : ${postList}">
+        <td>
+            <a th:text="${post.id}" href="@{|/post/detail/${post.id|}"></a>
+        </td>
+        <td th:text="${post.title}"></td>
+        <td th:text="${post.createDate}"></td>
+    </tr>
+    </tbody>
+</table>

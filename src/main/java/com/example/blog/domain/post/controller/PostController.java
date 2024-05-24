@@ -20,7 +20,6 @@ public class PostController {
     @GetMapping("/list")
     public String list(Model model) {
         List<Post> postList = postService.getList();
-        
         model.addAttribute("postList", postList);
         return "post/list";
     }
