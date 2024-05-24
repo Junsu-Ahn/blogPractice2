@@ -1,5 +1,6 @@
 package com.example.blog;
 
+import com.example.blog.domain.post.entity.Post;
 import com.example.blog.domain.post.service.PostService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,7 @@ class BlogApplicationTests {
 		{
 			String title = String.format("제목 %d", i);
 			String content = String.format("내용 %d",i);
-			LocalDateTime createDate = LocalDateTime.now();
-			postService.create(title, content, createDate);
+			Post p = postService.create(title, content);
 		}
 	}
 

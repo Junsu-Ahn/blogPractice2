@@ -1,12 +1,11 @@
 package com.example.blog.domain.post.controller;
 
-import org.springframework.ui.Model;
 import com.example.blog.domain.post.entity.Post;
 import com.example.blog.domain.post.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,6 +22,27 @@ public class PostController {
         model.addAttribute("postList", postList);
         return "post/list";
     }
+
+    @GetMapping(value = "/detail/{id}")
+    public String detail(Model model, @PathVariable("id") Long id) {
+
+        Post p = postService.getPost(id);
+
+        model.addAttribute("post", p);
+
+        return "post/detail";
+    }
     
-    
+    @GetMapping("/create")
+    public String create() {
+        return "post/create_form";
+    }
+
+    @PostMapping("/create")
+    public String postCreate(@RequestParam(value="title") String title, @RequestParam(value="content") String content){
+
+        Post p = postService.create(title, content);
+
+        return "redirect:/post/list";
+    }
 }

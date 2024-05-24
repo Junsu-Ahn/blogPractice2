@@ -1,4 +1,13 @@
-<table xmlns:th="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>리스트</title>
+</head>
+<body>
+<h1>리스트</h1>
+<a th:href="@{/post/create}">Create Post</a>
+
+<table>
     <thead>
     <tr>
         <th>번호</th>
@@ -9,10 +18,12 @@
     <tbody>
     <tr th:each="post : ${postList}">
         <td>
-            <a th:text="${post.id}" href="@{|/post/detail/${post.id|}"></a>
+            <a th:text="${post.id}" th:href="@{/post/detail/{id}(id=${post.id})}"></a>
         </td>
         <td th:text="${post.title}"></td>
         <td th:text="${post.createDate}"></td>
     </tr>
     </tbody>
 </table>
+</body>
+</html>
