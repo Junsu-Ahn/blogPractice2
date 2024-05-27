@@ -12,10 +12,7 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 @Transactional(readOnly = true)
@@ -39,6 +36,12 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
         String username = providerTypeCode + "__%s".formatted(oauthId);
 
+        Optional<Member> existingMember = memberService.findByUsername(username);
+        if (existingMember.isPresent()) {
+            return new CustomOAuth2User(existingMember.get().getUsername(), existingMember.get().getPassword(), new ArrayList<>());
+        }
+
+        // 새로운 회원 생성
         Member member = memberService.whenSocialLogin(providerTypeCode, username, nickname);
 
         List<GrantedAuthority> authorityList = new ArrayList<>();
@@ -46,6 +49,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         return new CustomOAuth2User(member.getUsername(), member.getPassword(), authorityList);
     }
 }
+
 
 class CustomOAuth2User extends User implements OAuth2User {
 

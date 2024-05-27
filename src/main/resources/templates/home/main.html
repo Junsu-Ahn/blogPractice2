@@ -1,9 +1,53 @@
-<div>
-    메인
-    <a sec:authorize="isAnonymous()" href="/member/login">로그인</a>
-    <a sec:authorize="isAuthenticated()" href="/member/logout">로그아웃</a>
-    <a href="/member/signup">회원가입</a>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메인 페이지</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0; /* 배경색 지정 */
+        }
+        nav {
+            background-color: rgba(0, 0, 0, 0.5); /* 네비게이션 메뉴 배경색 및 투명도 조정 */
+            color: #fff;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px; /* 네비게이션 메뉴와 컨텐츠 사이 여백 */
+        }
+        nav span {
+            margin: 0 10px;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+<nav>
+    <span>메인</span>
+    <a class="login-btn" sec:authorize="isAnonymous()" href="/member/login">로그인</a>
+    <a class="logout-btn" sec:authorize="isAuthenticated()" href="/member/logout">로그아웃</a>
+    <a class="signup-btn" href="/member/signup">회원가입</a>
     <div>
-        <a href="/oauth2/authorization/kakao">카카오 로그인</a>
+        <a class="oauth-btn" href="/oauth2/authorization/kakao">카카오 로그인</a>
     </div>
+</nav>
+<div class="content">
+    <h1>Welcome to Main Page</h1>
 </div>
+</body>
+</html>

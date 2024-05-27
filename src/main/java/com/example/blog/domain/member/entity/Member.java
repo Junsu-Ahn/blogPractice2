@@ -17,6 +17,7 @@ import org.hibernate.annotations.Comment;
 @AllArgsConstructor
 @ToString
 public class Member extends BaseEntity {
+
     @Comment("유저 아이디")
     @Column(unique = true)
     private String username;
