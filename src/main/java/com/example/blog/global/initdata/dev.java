@@ -18,9 +18,9 @@ public class dev {
     public ApplicationRunner init(MemberService memberService)
     {
         return args -> {
-            memberService.signup("admin", passwordEncoder.encode("admin"), "admin", "admin@test.conm");
-            memberService.signup("user1", passwordEncoder.encode("user1"), "user1", "user1@test.conm");
-            memberService.signup("user2", passwordEncoder.encode("user2"), "user2", "user2@test.conm");
+            memberService.signup("admin", "admin", "admin", "admin@test.conm");
+            memberService.signup("user1", "user1", "user1", "user1@test.conm");
+            memberService.signup("user2", "user2", "user2", "user2@test.conm");
         };
     }
 }

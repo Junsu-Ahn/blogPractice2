@@ -11,9 +11,10 @@ import org.springframework.stereotype.Service;
 public class MemberService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
-    public Member signup(String username, String password, String nickname, String email)
-    {
-        Member member = Member.builder()
+
+    public Member signup(String username, String password, String nickname, String email) {
+        Member member = Member
+                .builder()
                 .username(username)
                 .password(passwordEncoder.encode(password))
                 .nickname(nickname)

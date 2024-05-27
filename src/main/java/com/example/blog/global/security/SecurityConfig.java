@@ -22,17 +22,22 @@ public class SecurityConfig {
                 .authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
                         .requestMatchers(new AntPathRequestMatcher("/**")).permitAll())
                 .formLogin(
-                        formLogin -> formLogin.loginPage("/member/login")
+                        formLogin -> formLogin
+                                .loginPage("/member/login")
+                                .defaultSuccessUrl("/")
                 )
                 .logout(
-                        logout -> logout.logoutUrl("/member/logout")
+                        logout -> logout
+                                .logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
+                                .logoutSuccessUrl("/")
+                                .invalidateHttpSession(true)
                 )
         ;
         return http.build();
     }
 
     @Bean
-    public PasswordEncoder passwordEnCoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
