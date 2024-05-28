@@ -37,6 +37,8 @@ public class SecurityConfig {
                                 .logoutSuccessUrl("/")
                                 .invalidateHttpSession(true)
                 )
+                .csrf((csrf)-> csrf
+                        .ignoringRequestMatchers(new AntPathRequestMatcher("/**")))  // 이상한 경로로 접속시 차단
         ;
         return http.build();
     }
