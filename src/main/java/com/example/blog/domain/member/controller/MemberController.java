@@ -35,7 +35,7 @@ public class MemberController {
 
     @PostMapping("/signup")
     public String signup(@Valid SignForm signForm) {
-        memberService.signup(signForm.getUsername(), signForm.getPassword(), signForm.getNickname(), signForm.getEmail());
+        memberService.signup(signForm.getUsername(), signForm.getPassword(), signForm.getNickname(), signForm.getEmail(), signForm.getTypeCode());
         emailService.send(signForm.getEmail(), "서비스가입을 환영합니다!", "회원가입을 축하드립니다~^^");
         return "redirect:/member/login";
     }
@@ -57,5 +57,7 @@ public class MemberController {
 
         @NotBlank
         private String email;
+
+        private String TypeCode;
     }
 }

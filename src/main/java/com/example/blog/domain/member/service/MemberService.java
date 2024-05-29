@@ -14,13 +14,14 @@ import java.util.Optional;
 public class MemberService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
-    public Member signup(String username, String password, String nickname, String email) {
+    public Member signup(String username, String password, String nickname, String email, String providerTypeCode) {
         Member member = Member
                 .builder()
                 .username(username)
                 .password(passwordEncoder.encode(password))
                 .nickname(nickname)
                 .email(email)
+                .providerTypeCode(providerTypeCode)
                 .build();
 
         return memberRepository.save(member);
@@ -28,15 +29,19 @@ public class MemberService {
 
     @Transactional
     public Member whenSocialLogin(String providerTypeCode, String username, String nickname) {
-        Optional<Member> opMember = findByUsername(username);
+        Optional<Member> opMember = findByUsernameAndProviderTypeCode(username, providerTypeCode);
 
         if (opMember.isPresent()) return opMember.get();
 
         // 소셜 로그인를 통한 가입시 비번은 없다.
-        return signup(username, "", nickname, ""); // 최초 로그인 시 딱 한번 실행
+        return signup(username, "", nickname, "", providerTypeCode); // 최초 로그인 시 딱 한번 실행
     }
 
     public Optional<Member> findByUsername(String username) {
         return memberRepository.findByusername(username);
     }
+    public Optional<Member> findByUsernameAndProviderTypeCode(String username, String providerTypeCode) {
+        return memberRepository.findByUsernameAndProviderTypeCode(username, providerTypeCode);
+    }
 }
+
